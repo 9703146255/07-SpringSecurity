@@ -1,0 +1,13 @@
+package in.thiru.service;
+
+public class WelcomeService {
+	
+	 String apiUrl = "https://localhost:1111/welcome";
+     String username = "thiru";
+     String password = "thiru@123";
+
+	public String getSecurity() {
+
+	}
+
+}

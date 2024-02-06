@@ -1,0 +1,22 @@
+package in.thiru.rest;
+
+import org.springframework.web.reactive.function.client.WebClient;
+
+public class WelcomeRestController {
+
+	public String getMessage() {
+		
+		 // Replace with the actual URL of the service hosting the /welcome endpoint
+        String apiUrl = "http://localhost:8080/welcome";
+        String username = "your-username";
+        String password = "your-password";
+
+        // Create WebClient
+        
+        WebClient.create(apiUrl)
+        .get()
+        .uri("/welcome")
+     
+	}
+
+}

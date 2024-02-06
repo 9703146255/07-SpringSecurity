@@ -1,0 +1,13 @@
+package in.thiru.service;
+
+public class WelcomeService {
+	
+	 String apiUrl = "https://your-api-url.com/api/resource";
+     String username = "your-username";
+     String password = "your-password";
+
+	public String getSecurity() {
+
+	}
+
+}

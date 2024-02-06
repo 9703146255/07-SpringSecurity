@@ -1,0 +1,9 @@
+package in.thiru.service;
+
+public class WelcomeService {
+
+	public String getSecurity() {
+
+	}
+
+}

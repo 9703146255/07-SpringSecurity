@@ -1,0 +1,51 @@
+package in.thiru.security;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+
+import jakarta.security.auth.message.config.AuthConfig;
+
+import static org.springframework.security.config.Customizer.withDefaults;
+
+@EnableWebSecurity
+@Configuration
+public class SecurityConfig {
+	
+	
+	@Bean
+	 SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
+	{
+		http.authorizeHttpRequests(authorize->authorize.requestMatchers("/login","/contactUs","/aboutUs")
+											.permitAll()
+											.anyRequest()
+											.authenticated())
+											.httpBasic(withDefaults())
+											.formLogin(withDefaults());
+		
+		return http.build();
+	}
+	
+	InMemoryUserDetailsManager inMemoryUsers()
+	{
+		UserDetails thiruUser = User.withDefaultPasswordEncoder()
+		.username("thiru")
+		.password("thiru@123")
+		.authorities("ADMIN")
+		.build();
+		
+		User.withDefaultPasswordEncoder()
+		.username("king")
+		.password("king@123")
+		.authorities("USER")
+		.build();
+	}
+	
+	
+
+}

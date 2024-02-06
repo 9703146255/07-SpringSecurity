@@ -1,0 +1,32 @@
+package in.thiru.service;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+public class WelcomeService {
+
+	String apiUrl = "https://localhost:1111/welcome";
+	String username = "thiru";
+	String password = "thiru@123";
+
+	public void getSecurity() {
+
+		RestTemplate restTemplate = new RestTemplate();
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setBasicAuth(username, password);
+
+		HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+
+		// Make the HTTP GET request
+		ResponseEntity<String> responseEntity = restTemplate.exchange(apiUrl, HttpMethod.GET, requestEntity,
+				String.class);
+
+		System.out.println("Response: " + responseEntity.getBody());
+
+	}
+
+}

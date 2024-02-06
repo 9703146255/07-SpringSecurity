@@ -1,0 +1,13 @@
+package in.thiru.config;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
+
+@FeignClient(name = "WelcomeRestController", url = "http://localhost:1111/welcome")
+public interface WelcomeFeignClient {
+
+	@GetMapping("/")
+	String getMessage(@RequestHeader("Authorization") String authorizationHeader);
+
+}

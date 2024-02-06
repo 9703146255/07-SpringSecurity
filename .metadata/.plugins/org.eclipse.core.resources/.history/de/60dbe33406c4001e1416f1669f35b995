@@ -1,0 +1,43 @@
+package in.thiru.rest;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import io.netty.handler.codec.base64.Base64;
+
+@RestController
+public class WelcomeRestController {
+
+    @GetMapping("/welcome")
+    public String getMessage() {
+        String apiUrl = "http://localhost:1111/welcome";
+        String username = "root";
+        String password = "123456";
+
+        WebClient webClient = WebClient.builder()
+                .defaultHeader(HttpHeaders.AUTHORIZATION, "Basic " + getBasicAuth(username, password))
+                .build();
+
+        try {
+            String response = webClient.get().uri(apiUrl).retrieve().bodyToMono(String.class).block();
+            System.out.println("Response from Welcome Service: " + response);
+            return response;
+        } catch (Exception e) {
+            System.err.println("Error accessing the Welcome Service: " + e.getMessage());
+            return "Error accessing the Welcome Service";
+        }
+    }
+
+    private static String getBasicAuth(String username, String password) {
+        String auth = username + ":" + password;
+        ByteBuf encodedAuth = Base64.encode(Unpooled.copiedBuffer(auth.getBytes()));
+        byte[] encodedBytes = new byte[encodedAuth.readableBytes()];
+        encodedAuth.readBytes(encodedBytes);
+        encodedAuth.release();
+        return "Basic " + new String(encodedBytes);
+    }
+}

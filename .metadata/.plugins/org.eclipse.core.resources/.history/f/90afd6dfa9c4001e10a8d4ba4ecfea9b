@@ -1,0 +1,25 @@
+package in.thiru.rest;
+
+public class BankRestController {
+	
+	public String loginPage()
+	{
+		return "LOGIN HERE";
+	}
+	
+	public String transfer()
+	{
+		return "your tranfering amount is :: 5000RS";
+	}
+	
+	public String 	balance()
+	{
+		return "your balance is :: 60000RS";
+	}
+	
+	public String aboutUs()
+	{
+		return "welcome to thiru it we are providing all courses here";
+	}
+
+}

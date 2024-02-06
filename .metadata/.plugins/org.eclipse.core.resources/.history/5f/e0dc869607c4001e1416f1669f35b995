@@ -1,0 +1,36 @@
+package in.thiru.rest;
+
+import java.util.Base64;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.web.reactive.function.client.WebClient;
+
+public class WelcomeRestController {
+
+	public String getMessage() {
+		
+		 // Replace with the actual URL of the service hosting the /welcome endpoint
+        String apiUrl = "http://localhost:1111/welcome";
+        String username = "root";
+        String password = "123456";
+        String combileneCredentials=username+":"+password;
+        String encodeToString = Base64.getEncoder().encodeToString(combileneCredentials.getBytes());
+        
+        HttpHeaders header=new HttpHeaders();
+        header.set("Authorization", "Basic "+encodeToString);
+
+        // Create WebClient
+        
+        String block = WebClient.create(apiUrl)
+        .get()
+        .uri("/welcome")
+        .headers(httpHeaders-> httpHeaders.addAll(httpHeaders))
+        .retrieve()
+        .bodyToMono(String.class)
+        .block();
+        
+        return block;
+     
+	}
+
+}

@@ -1,0 +1,15 @@
+package in.thiru.rest;
+
+public class BankRestController {
+	
+	public String loginPage()
+	{
+		return "LOGIN HERE";
+	}
+	
+	public String transfer()
+	{
+		return "your tranfering amount is :: 5000RS";
+	}
+
+}

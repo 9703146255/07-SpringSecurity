@@ -1,0 +1,11 @@
+package in.thiru.config;
+
+import org.springframework.cloud.openfeign.FeignClient;
+
+@FeignClient(name = "WelcomeRestController",url = "http://localhost:1111/welcome")
+public interface WelcomeFeignClient {
+	
+	
+	
+
+}

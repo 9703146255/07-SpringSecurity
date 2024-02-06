@@ -1,0 +1,5 @@
+package in.thiru.security;
+
+public class SecurityConfiguration {
+
+}
